@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
+ * Hello
 * This interface will connect all the classes so that it can be easier to make updates and maintenance
 * @author Lim Hong Zhi,
  * */
