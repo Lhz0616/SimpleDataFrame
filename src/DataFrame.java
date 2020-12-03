@@ -7,7 +7,7 @@ import java.util.ArrayList;
 * @author Lim Hong Zhi,
  * */
 
-public interface DataFrame {
+public interface DataFrame{
     /**
      * Return the name of the dataFrame
      * If no name is give, the default will be DataFrame1
@@ -20,34 +20,10 @@ public interface DataFrame {
      * @param name
      * @return name of dataframe
      */
-    String setName(String name);
+    void setName(String name);
 
     /**
-     * Read the CSV file and return an Arraylist of the data, default separator is ','
-     * @param file      input file
-     * @return
-     */
-    ArrayList<ArrayList<?>> readCSV(File file);
-
-    /**
-     * Read the CSV file and return an Arraylist of the data
-     * @param file      input file
-     * @param separator used to split the data
-     * @return ArrayList with a wildcard
-     */
-    ArrayList<ArrayList<?>> readCSV(File file,char separator);
-
-    /**
-     * Sort the dataframe according to the column selected with the header
-     * The default sort is ascending
-     *
-     * @param column the column that wanted to sort
-     * @return
-     */
-    DataFrame sort(String column);
-
-    /**
-     * Return the head (attribute) of the dataframe
+     * Return the header (attribute) of the dataframe
      * @return head of the dataframe
      */
     DataFrame head();
