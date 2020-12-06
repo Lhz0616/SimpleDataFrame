@@ -3,34 +3,50 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataFrameReader implements Reader{
+public class DataFrameReader implements Reader, DataFrame{
     private final char DEFAULT_SEPARATOR = ',';
-    private List DATA;
+    public static List<List<String>> DATA;
+    private String dataFrameName;
 
-    @Override
-    public List<String[]> readCSV(String filePath) {
+    public DataFrameReader() {}
+
+    public List<List<String>> readCSV(String filePath) {
         return readCSV(filePath, DEFAULT_SEPARATOR);
     }
 
     @Override
-    public List readCSV(String filePath, char separator) {
+    public List<List<String>> readCSV(String filePath, char separator) {
         if(separator == ' '){
             separator = DEFAULT_SEPARATOR;
         }
 
         String line;
-        List lines = new ArrayList();
+        DATA = new ArrayList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             while ((line = br.readLine()) != null) {
-                List values = Arrays.asList(line.split(String.valueOf(separator)));
-                lines.add(values);
+                List<String> values = Arrays.asList(line.split(String.valueOf(separator)));
+                DATA.add(values);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        DATA = lines;
         return DATA;
+    }
+
+    @Override
+    public String getName() {
+        return dataFrameName;
+    }
+
+    @Override
+    public void setName(String name) {
+        dataFrameName = name;
+    }
+
+    @Override
+    public String head() {
+        return DATA.get(0).toString();
     }
 }
