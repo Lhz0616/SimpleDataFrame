@@ -17,7 +17,7 @@ public class DataFrameWriter implements Writer{
         try {
             FileWriter writer = new FileWriter(new File(name+".csv"));
             for(int i = 0; i<dataFrame.size(); i++){
-                List<String> stringList = (List<String>) dataFrame.get(i);
+                List<String> stringList = dataFrame.get(i);
                 for(int j = 0; j<stringList.size(); j++){
                     writer.write(stringList.get(j));
                     if(j<stringList.size()-1) writer.write(",");

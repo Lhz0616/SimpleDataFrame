@@ -5,8 +5,9 @@ import java.util.List;
 
 public class DataFrameReader implements Reader, DataFrame{
     private final char DEFAULT_SEPARATOR = ',';
-    public static List<List<String>> DATA;
+    public static List<List<String>> COLUMNDATA;
     private String dataFrameName;
+    private static List<List<String>> ROWDATA;
 
     public DataFrameReader() {}
 
@@ -21,18 +22,18 @@ public class DataFrameReader implements Reader, DataFrame{
         }
 
         String line;
-        DATA = new ArrayList();
+        COLUMNDATA = new ArrayList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             while ((line = br.readLine()) != null) {
                 List<String> values = Arrays.asList(line.split(String.valueOf(separator)));
-                DATA.add(values);
+                COLUMNDATA.add(values);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return DATA;
+        return COLUMNDATA;
     }
 
     @Override
@@ -47,6 +48,6 @@ public class DataFrameReader implements Reader, DataFrame{
 
     @Override
     public String head() {
-        return DATA.get(0).toString();
+        return COLUMNDATA.get(0).toString();
     }
 }

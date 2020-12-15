@@ -1,4 +1,6 @@
-public class Sorting{
+import java.util.List;
+
+public interface Sorting{
 
     /**
      * Sort the dataframe according to the column selected with the header
@@ -7,7 +9,5 @@ public class Sorting{
      * @param column the column that wanted to sort
      * @return
     */
-    DataFrame sort(String column){
-        return null;
-    }
+    List<List<String>> sort(String column);
 }
