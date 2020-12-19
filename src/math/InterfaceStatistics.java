@@ -5,15 +5,15 @@ public interface InterfaceStatistics {
 
     float[] sd();
 
-    float min();
+    float[] min();
 
-    float max();
+    float[] max();
 
     float[] mean();
 
     float mode();
 
-    float median();
+    float[] median();
 
-    float range();
+    float[] range();
 }

@@ -43,6 +43,16 @@ public class Testing {
         Statistics s = new Statistics();
 
         float [] sd = s.sd();
+        float [] min = s.min();
+        float [] max = s.max();
+        float[] range = s.range();
+        float [] median = s.median();
+        System.out.println(r.DATA.toString());
+        System.out.println(s.COLUMNDATA.toString());
+        System.out.println(Arrays.toString(min));
+        System.out.println(Arrays.toString(max));
+        System.out.println(Arrays.toString(range));
+        System.out.println(Arrays.toString(median));
         /*for(int i = 0; i<s.calculate.size(); i++){
             float[] temp = s.calculate.get(i);
             System.out.println(Arrays.toString(temp));

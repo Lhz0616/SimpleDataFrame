@@ -3,6 +3,7 @@ package math;
 import data.DataFrameReader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Statistics implements InterfaceStatistics{
@@ -10,6 +11,40 @@ public class Statistics implements InterfaceStatistics{
     DataFrameReader r = new DataFrameReader();
     public static List<List<String>> COLUMNDATA;
     public static List<float[]> calculate = new ArrayList<>();
+
+    public Statistics() {
+        COLUMNDATA = new ArrayList<>();
+
+        int numCols = r.DATA.get(0).size();
+        ArrayList<String> rowData = new ArrayList();
+        for(int j = 0; j<numCols; j++) {
+            rowData.clear();
+            for (int z = 0; z < r.DATA.size(); z++) {
+                String[] temp = r.DATA.get(z).toArray(new String[0]);
+                String temp1 = temp[j];
+                rowData.add(temp1);
+            }
+            COLUMNDATA.add((List<String>) rowData.clone());
+        }
+
+        for(int i = 0; i<COLUMNDATA.size(); i++) {
+            List<String> temp = COLUMNDATA.get(i);
+            float[] temp1 = new float[temp.size() - 1];
+            int j = 0;
+            for (int start = 0; start < temp.size(); start++) {
+                String temp2 = temp.get(start);
+                if (isFloat(temp2)) {
+                    temp1[j] = Float.parseFloat(temp2);
+                    j++;
+                }
+            }
+            try {
+                calculate.add(temp1);
+            } catch (NullPointerException e) {
+                return;
+            }
+        }
+    }
 
     @Override
     public float[] variance() {
@@ -37,27 +72,37 @@ public class Statistics implements InterfaceStatistics{
     }
 
     @Override
-    public float min() {
-        // minIndex = 0;
-        // for(int i= 0; i<data.length; i++){
-        //
-        // if data[i] < data[minIndex] minIndex = i;
-        // data[minIndex] is min
-        return 0;
+    public float[] min() {
+        int minIndex = 0;
+        float [] min = new float[calculate.size()];
+        for(int i = 0; i<calculate.size(); i++){
+            float [] temp = calculate.get(i);
+            for(int j = 0; j<temp.length; j++){
+                if(temp[j]<temp[minIndex]) minIndex = j;
+            }
+
+            min[i] = temp[minIndex];
+        }
+        return min;
     }
 
     @Override
-    public float max() {
-        return 0;
+    public float[] max() {
+        int maxIndex = 0;
+        float [] max = new float[calculate.size()];
+        for(int i = 0; i<calculate.size(); i++){
+            float [] temp = calculate.get(i);
+            for(int j = 0; j<temp.length; j++){
+                if(temp[j]>temp[maxIndex]) maxIndex = j;
+            }
+
+            max[i] = temp[maxIndex];
+        }
+        return max;
     }
 
     @Override
     public float[] mean() {
-        changeToColumn();
-        for(int i = 0; i<COLUMNDATA.size(); i++){
-            List<String> temp = COLUMNDATA.get(i);
-            checkFloat(temp);
-        }
         int size = calculate.size();
         float[] avg = new float[size];
 
@@ -73,46 +118,36 @@ public class Statistics implements InterfaceStatistics{
     }
 
     @Override
-    public float median() {
-        return 0;
+    public float[] median() {
+        float [] medianArr = new float[calculate.size()];
+        for(int i = 0; i<calculate.size(); i++){
+            float [] temp = calculate.get(i);
+            Arrays.sort(temp);
+            System.out.println(Arrays.toString(temp));
+            if(temp.length%2 == 1){
+                int median = (temp.length+1)/2 - 1;
+                medianArr[i] = temp[median];
+            }
+            else{
+                int median = temp.length/2 - 1;
+                float mean = (temp[median] + temp[median+1])/2;
+                medianArr[i] = mean;
+            }
+        }
+        return medianArr;
     }
 
     @Override
-    public float range() {
-        return 0;
-    }
+    public float[] range() {
+        float[] max = max();
+        float [] min = min();
+        float [] range = new float[calculate.size()];
 
-    private void changeToColumn(){
-        COLUMNDATA = new ArrayList<>();
+        for(int i = 0; i<range.length; i++){
+            range[i] = max[i] - min[i];
+        }
 
-        int numCols = r.DATA.get(0).size();
-        ArrayList<String> rowData = new ArrayList();
-        for(int j = 0; j<numCols; j++) {
-            rowData.clear();
-            for (int z = 0; z < r.DATA.size(); z++) {
-                String[] temp = r.DATA.get(z).toArray(new String[0]);
-                String temp1 = temp[j];
-                rowData.add(temp1);
-            }
-            COLUMNDATA.add((List<String>) rowData.clone());
-        }
-    }
-
-    private void checkFloat(List<String> row){
-        float[] temp1 = new float[row.size()-1];
-        int j = 0;
-        for(int start = 0; start<row.size(); start++){
-            String temp = row.get(start);
-            if(isFloat(temp)){
-                temp1[j] = Float.parseFloat(temp);
-                j++;
-            }
-        }
-        try {
-            calculate.add(temp1);
-        } catch(NullPointerException e){
-            return;
-        }
+        return range;
     }
 
     private boolean isFloat(String str){
@@ -121,7 +156,6 @@ public class Statistics implements InterfaceStatistics{
         } catch (NumberFormatException e){
             return false;
         }
-
         return true;
     }
 
@@ -130,7 +164,6 @@ public class Statistics implements InterfaceStatistics{
         for(int first = 0; first<numbers.length; first++){
             sum+= numbers[first];
         }
-
         return sum;
     }
 }
