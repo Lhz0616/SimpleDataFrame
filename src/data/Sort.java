@@ -1,3 +1,5 @@
+package data;
+
 import java.util.List;
 
 public class Sort implements Sorting{

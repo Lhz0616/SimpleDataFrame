@@ -1,3 +1,5 @@
+package data;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -5,11 +7,8 @@ import java.util.List;
 
 public class DataFrameReader implements Reader, DataFrame{
     private final char DEFAULT_SEPARATOR = ',';
-    public static List<List<String>> COLUMNDATA;
+    public static List<List<String>> DATA;
     private String dataFrameName;
-    private static List<List<String>> ROWDATA;
-
-    public DataFrameReader() {}
 
     public List<List<String>> readCSV(String filePath) {
         return readCSV(filePath, DEFAULT_SEPARATOR);
@@ -22,19 +21,21 @@ public class DataFrameReader implements Reader, DataFrame{
         }
 
         String line;
-        COLUMNDATA = new ArrayList();
+        DATA = new ArrayList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             while ((line = br.readLine()) != null) {
-                List<String> values = Arrays.asList(line.split(String.valueOf(separator)));
-                COLUMNDATA.add(values);
+                List<String> values = new ArrayList(Arrays.asList(line.split(String.valueOf(separator))));
+                DATA.add(values);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return COLUMNDATA;
+        return DATA;
     }
+
+
 
     @Override
     public String getName() {
@@ -48,6 +49,12 @@ public class DataFrameReader implements Reader, DataFrame{
 
     @Override
     public String head() {
-        return COLUMNDATA.get(0).toString();
+        return DATA.get(0).toString();
+    }
+
+    public void print(){
+        for(int i = 0; i< DATA.size(); i++){
+            System.out.println(DATA.get(i).toString());
+        }
     }
 }

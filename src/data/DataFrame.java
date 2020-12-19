@@ -1,3 +1,5 @@
+package data;
+
 /**
  * Hello
 * This interface will connect all the classes so that it can be easier to make updates and maintenance

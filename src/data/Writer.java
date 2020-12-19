@@ -1,3 +1,5 @@
+package data;
+
 import java.util.List;
 
 public interface Writer {
@@ -6,7 +8,7 @@ public interface Writer {
      * name is default to
      * @param dataFrame all the data from the data frame
      */
-    void writeCSV(List<List<String>> dataFrame);
+    void writeCSV();
 
 
     /**
@@ -14,5 +16,5 @@ public interface Writer {
      * @param dataFrame all the data from the data frame
      * @param name name of the new csv file
      */
-    void writeCSV(List<List<String>> dataFrame, String name);
+    void writeCSV(String name);
 }
