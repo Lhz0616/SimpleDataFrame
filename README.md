@@ -6,7 +6,7 @@ Hello guys! (And girls too xd) So you must be wondering what is git right?
 Let me give you a step-by-step guide to get familiar with git and github.  <br><br>
 
 ### FIRST PART  <br>
-************* 
+*************
 <br>1. Download **[Git](https://git-scm.com/downloads)** inside your computer (dun worry there is mac and windows version, you will be covered)  
 > - The step are quite confusing and quite complicated, 
 > - I believe that most of you dun understand what does the setting means.
@@ -73,7 +73,7 @@ Make sure that you know where is the file located.    <br><br><br>
 
 
 1. Lim Hong Zhi \\ hello guys and girls xd <br>
-2. <br>
+2. Sam Zhuo Li \ yay i first xd<br>
 3. <br>  
 4. <br>
 5. <br>   
