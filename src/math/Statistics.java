@@ -165,4 +165,28 @@ public class Statistics implements InterfaceStatistics{
         }
         return sum;
     }
+
+    public List<float[]> StandardScale(){
+        float [] mean = mean();
+        float [] sd = sd();
+        List<float[]> sdScale = new ArrayList<>();
+
+        int z = 0;
+        for(int i = 0; i< calculate.size(); i++){
+            float [] insert = new float[calculate.get(i).length];
+            float[] temp = calculate.get(i);
+            for(int j = 0; j<temp.length; j++){
+                insert[j] = (temp[j] - mean[z]) / sd[z];
+            }
+
+            z++;
+            sdScale.add(insert);
+        }
+        return sdScale;
+    }
+
+    public float[] minMaxScaling(){
+
+        return new float[]{};
+    }
 }
