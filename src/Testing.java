@@ -5,6 +5,7 @@ import math.Statistics;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 // Object
 
@@ -36,10 +37,11 @@ public class Testing {
         System.out.println(data.toString());*/
 
         String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
+        final long startTime = System.nanoTime();
 
         DataFrameReader r = new DataFrameReader();
         r.readCSV(filePath);
-
+        r.print();
         Statistics s = new Statistics();
 
         float [] sd = s.sd();
@@ -63,12 +65,15 @@ public class Testing {
         System.out.println(s.COLUMNDATA.toString());
         System.out.println(Arrays.toString(mean));*/
 
-        /*System.out.println(r.DATA.toString());
+        System.out.println(r.DATA.toString());
 
         Column c = new Column();
 
-        String [] column = {"Colour", "Yellow", "Green", "Blue", ""};
+        String [] column = {"Colour", "Yellow", "Green", "", "Black", "White", "Red"};
         c.concatColumn(column);
-        r.print();*/
+        r.print();
+
+        final double duration = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+        System.out.println(duration);
     }
 }

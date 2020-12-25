@@ -123,7 +123,6 @@ public class Statistics implements InterfaceStatistics{
         for(int i = 0; i<calculate.size(); i++){
             float [] temp = calculate.get(i);
             Arrays.sort(temp);
-            System.out.println(Arrays.toString(temp));
             if(temp.length%2 == 1){
                 int median = (temp.length+1)/2 - 1;
                 medianArr[i] = temp[median];
