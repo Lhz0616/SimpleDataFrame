@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DataFrameReader implements Reader, DataFrame{
     private final char DEFAULT_SEPARATOR = ',';
-    public static List<List<String>> DATA;
+    public static List<List<String>> DATA = new ArrayList<>();
     private String dataFrameName;
 
     public List<List<String>> readCSV(String filePath) {
@@ -34,8 +34,6 @@ public class DataFrameReader implements Reader, DataFrame{
 
         return DATA;
     }
-
-
 
     @Override
     public String getName() {

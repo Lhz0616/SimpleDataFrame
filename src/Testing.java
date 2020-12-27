@@ -1,7 +1,9 @@
 import data.DataFrameReader;
 import math.Statistics;
+import sql.DBReader;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,25 +40,27 @@ public class Testing {
         String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
         final long startTime = System.nanoTime();
 
+        DBReader read = new DBReader("groupmemberdb");
         DataFrameReader r = new DataFrameReader();
-        r.readCSV(filePath);
-        //r.print();
+        //r.readCSV(filePath);
+        read.readDB();
+        System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
-
+        System.out.println(s.COLUMNDATA.toString());
 
         System.out.println(Arrays.toString(s.mean()));
         System.out.println(Arrays.toString(s.sd()));
 
         List<float[]> sdScale = s.StandardScale();
 
-        for(int i = 0; i<sdScale.size(); i++){
+        /*for(int i = 0; i<sdScale.size(); i++){
             float[] temp1 = s.calculate.get(i);
             System.out.println(Arrays.toString(temp1));
             float[] temp = sdScale.get(i);
             System.out.println(Arrays.toString(temp));
-        }
+        }*/
 
-        /*float [] sd = s.sd();
+        float [] sd = s.sd();
         float [] min = s.min();
         float [] max = s.max();
         float[] range = s.range();
@@ -67,7 +71,7 @@ public class Testing {
         System.out.println(Arrays.toString(max));
         System.out.println(Arrays.toString(range));
         System.out.println(Arrays.toString(median));
-        *//*for(int i = 0; i<s.calculate.size(); i++){
+        /*for(int i = 0; i<s.calculate.size(); i++){
             float[] temp = s.calculate.get(i);
             System.out.println(Arrays.toString(temp));
         }*//*

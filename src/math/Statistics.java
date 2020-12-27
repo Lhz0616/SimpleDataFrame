@@ -9,17 +9,16 @@ import java.util.List;
 public class Statistics implements InterfaceStatistics{
 
     DataFrameReader r = new DataFrameReader();
-    public static List<List<String>> COLUMNDATA;
+    public static List<List<String>> COLUMNDATA = new ArrayList<>();;
     public static List<float[]> calculate = new ArrayList<>();
 
     public Statistics() {
-        COLUMNDATA = new ArrayList<>();
 
-        int numCols = r.DATA.get(0).size();
+        int numCols = r.DATA.get(1).size();
         ArrayList<String> rowData = new ArrayList();
         for(int j = 0; j<numCols; j++) {
             rowData.clear();
-            for (int z = 0; z < r.DATA.size(); z++) {
+            for (int z = 1; z < r.DATA.size(); z++) {
                 String[] temp = r.DATA.get(z).toArray(new String[0]);
                 String temp1 = temp[j];
                 rowData.add(temp1);
@@ -29,7 +28,7 @@ public class Statistics implements InterfaceStatistics{
 
         for(int i = 0; i<COLUMNDATA.size(); i++) {
             List<String> temp = COLUMNDATA.get(i);
-            float[] temp1 = new float[temp.size() - 1];
+            float[] temp1 = new float[temp.size()];
             int j = 0;
             for (int start = 0; start < temp.size(); start++) {
                 String temp2 = temp.get(start);
@@ -51,12 +50,12 @@ public class Statistics implements InterfaceStatistics{
         float [] mean = mean();
         float [] variance = new float[mean.length];
 
-        for(int i = 0; i<variance.length; i++){
-            float [] temp = calculate.get(i);
+        for(int start = 0; start<variance.length; start++){
+            float [] temp = calculate.get(start);
             for(int j = 0; j<temp.length; j++) {
-                variance[i] += Math.pow(temp[j] - mean[i], 2);
+                variance[start] += Math.pow(temp[j] - mean[start], 2);
             }
-            variance[i] /= temp.length;
+            variance[start] /= temp.length;
         }
         return variance;
     }
