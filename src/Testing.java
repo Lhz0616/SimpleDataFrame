@@ -1,5 +1,6 @@
 import data.DataFrameReader;
 import math.Statistics;
+import sql.DBReader;
 
 import java.io.IOException;
 
@@ -35,10 +36,10 @@ public class Testing {
         String filePath = "C:\\Users\\Roger Wong\\IdeaProjects\\SimpleDataFrame\\src\\Book1.csv";
         final long startTime = System.nanoTime();
 
-        //DBReader read = new DBReader("groupmemberdb");
+        DBReader read = new DBReader("groupmemberdb");
         DataFrameReader r = new DataFrameReader();
-        r.readCSV(filePath);
-        //read.readDB();
+        //r.readCSV(filePath);
+        read.readDB();
         System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
         rowRange rowRange= new rowRange();

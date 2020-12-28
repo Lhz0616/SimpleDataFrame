@@ -4,6 +4,7 @@ import data.DataFrameReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class DBReader extends DataFrameReader {
 
@@ -11,13 +12,16 @@ public class DBReader extends DataFrameReader {
 
     public DBReader(String dbName){
         try{
+            final long startTime = System.nanoTime();
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbName,"root","");
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
             System.out.println("There is an error connecting to the database. Please try again!");
         }
+
         System.out.println("Connected to the database successfully!");
     }
 

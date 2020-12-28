@@ -64,7 +64,7 @@ public class Statistics implements InterfaceStatistics{
     public float[] sd() {
         float [] variance = variance();
         float [] sd = new float[variance.length];
-        for(int i= 0; i<sd.length; i++){
+        for(int i = 0; i<sd.length; i++){
             sd[i] = (float) Math.sqrt(variance[i]);
         }
         return sd;
