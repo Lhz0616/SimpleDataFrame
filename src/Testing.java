@@ -1,12 +1,7 @@
 import data.DataFrameReader;
 import math.Statistics;
-import sql.DBReader;
 
-import java.io.*;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 // Object
 
@@ -37,7 +32,7 @@ public class Testing {
 
         System.out.println(data.toString());*/
 
-        String filePath = "C:\\Users\\User\\SimpleDataFrame\\src\\Book1.csv";
+        String filePath = "C:\\Users\\Roger Wong\\IdeaProjects\\SimpleDataFrame\\src\\Book1.csv";
         final long startTime = System.nanoTime();
 
         //DBReader read = new DBReader("groupmemberdb");
