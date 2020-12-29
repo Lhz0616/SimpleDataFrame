@@ -1,6 +1,7 @@
 import data.Column;
 import data.DataFrameReader;
 import data.DataFrameWriter;
+import data.rowCol;
 import math.Statistics;
 import sql.DBReader;
 import sql.DBWriter;
@@ -47,8 +48,8 @@ public class Testing {
         //read.readDB();
         System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
-        //rowRange rowRange= new rowRange();
-        //rowRange.colRange(new String[]{"name", "salary"});
+        //rowCol rowRange= new rowCol();
+        //rowCol.colRange(new String[]{"name", "salary"});
 
         System.out.println(s.COLUMNDATA.toString());
 
