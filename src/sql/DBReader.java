@@ -4,34 +4,40 @@ import data.DataFrameReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class DBReader extends DataFrameReader {
 
-    Connection con;
+    public static Connection con;
+    private String tableName;
+    private String dbName;
 
-    public DBReader(String dbName){
+    public DBReader(){}
+
+    public DBReader(String dbName, String tableName, String username, String password){
+        this.dbName = dbName;
+        this.tableName = tableName;
         try{
-            final long startTime = System.nanoTime();
+            System.out.println("Trying to connect to the database: " + dbName);
+
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbName,"root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbName,username,password);
+
+            System.out.println("Connected to the database successfully!");
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
             System.out.println("There is an error connecting to the database. Please try again!");
+            System.exit(-1);
         }
-
-        System.out.println("Connected to the database successfully!");
     }
 
     public void readDB(){
         try {
             Statement stmt = con.createStatement();
-            ResultSet set = stmt.executeQuery("select * from generalInfo");
+            ResultSet set = stmt.executeQuery("select * from " + tableName);
             ResultSetMetaData md = set.getMetaData();
-            List<String> empty = new ArrayList<>();
-            DATA.add(empty);
+
             while(set.next()){
                 List<String> getData = new ArrayList<>();
                 for(int j = 1; j<=md.getColumnCount() ; j++){
@@ -43,4 +49,9 @@ public class DBReader extends DataFrameReader {
             throwables.printStackTrace();
         }
     }
+
+    public String getDbName() {
+        return dbName;
+    }
+
 }

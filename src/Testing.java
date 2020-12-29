@@ -1,8 +1,13 @@
+import data.Column;
 import data.DataFrameReader;
+import data.DataFrameWriter;
 import math.Statistics;
 import sql.DBReader;
+import sql.DBWriter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 // Object
 
@@ -33,34 +38,36 @@ public class Testing {
 
         System.out.println(data.toString());*/
 
-        String filePath = "C:\\Users\\Roger Wong\\IdeaProjects\\SimpleDataFrame\\src\\Book1.csv";
+        String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
         final long startTime = System.nanoTime();
 
-        DBReader read = new DBReader("groupmemberdb");
+        //DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
         DataFrameReader r = new DataFrameReader();
-        //r.readCSV(filePath);
-        read.readDB();
+        r.readCSV(filePath);
+        //read.readDB();
         System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
-        rowRange rowRange= new rowRange();
-        rowRange.colRange(new String[]{"name", "salary"});
-
+        //rowRange rowRange= new rowRange();
+        //rowRange.colRange(new String[]{"name", "salary"});
 
         System.out.println(s.COLUMNDATA.toString());
 
-       /* System.out.println(Arrays.toString(s.mean()));
+        System.out.println(Arrays.toString(s.mean()));
         System.out.println(Arrays.toString(s.sd()));
 
         List<float[]> sdScale = s.StandardScale();
 
-        *//*for(int i = 0; i<sdScale.size(); i++){
+        for(int i = 0; i<sdScale.size(); i++){
             float[] temp1 = s.calculate.get(i);
             System.out.println(Arrays.toString(temp1));
             float[] temp = sdScale.get(i);
             System.out.println(Arrays.toString(temp));
-        }*//*
+        }
 
-        float [] sd = s.sd();
+        DBWriter writer = new DBWriter();
+        writer.writeDB("jdbc:mysql://localhost/groupmemberdb", "newTable", "root", "");
+
+        /*float [] sd = s.sd();
         float [] min = s.min();
         float [] max = s.max();
         float[] range = s.range();
@@ -73,26 +80,24 @@ public class Testing {
         System.out.println(Arrays.toString(median));
 
 
-        *//*for(int i = 0; i<s.calculate.size(); i++){
+        for(int i = 0; i<s.calculate.size(); i++){
             float[] temp = s.calculate.get(i);
             System.out.println(Arrays.toString(temp));
-        }*//**//*
+        }
 
         System.out.println(Arrays.toString(sd));
-        *//**//*System.out.println(r.DATA.toString());
-        System.out.println(s.COLUMNDATA.toString());
-        System.out.println(Arrays.toString(mean));*//**//*
-
         System.out.println(r.DATA.toString());
+        System.out.println(s.COLUMNDATA.toString());
 
-        Column c = new Column();
+        System.out.println(r.DATA.toString());*/
+
+        /*Column c = new Column();
 
         String [] column = {"Colour", "Yellow", "Green", "", "Black", "White", "Red"};
-        c.concatColumn(column);
-        r.print();*//*
+        c.concatColumn(column)*/;
 
-        final double duration = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
-        System.out.println(duration);
-        */
+        //String url = "";
+        //DBWriter write = new DBWriter();
+        //write.writeDB();
     }
 }

@@ -5,26 +5,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataFrameReader implements Reader, DataFrame{
+public class DataFrameReader{
     private final char DEFAULT_SEPARATOR = ',';
     public static List<List<String>> DATA = new ArrayList<>();
     private String dataFrameName;
+    public static String [] header;
 
     public List<List<String>> readCSV(String filePath) {
         return readCSV(filePath, DEFAULT_SEPARATOR);
     }
 
-    @Override
     public List<List<String>> readCSV(String filePath, char separator) {
         if(separator == ' '){
             separator = DEFAULT_SEPARATOR;
         }
 
         String line;
-        DATA = new ArrayList();
-
+        int i =0;
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
             while ((line = br.readLine()) != null) {
+                if(i == 0) {
+                    header = line.split(String.valueOf(separator));
+                    i++;
+                    continue;
+                }
                 List<String> values = new ArrayList(Arrays.asList(line.split(String.valueOf(separator))));
                 DATA.add(values);
             }
@@ -35,17 +40,16 @@ public class DataFrameReader implements Reader, DataFrame{
         return DATA;
     }
 
-    @Override
     public String getName() {
         return dataFrameName;
     }
 
-    @Override
+
     public void setName(String name) {
         dataFrameName = name;
     }
 
-    @Override
+
     public String head() {
         return DATA.get(0).toString();
     }

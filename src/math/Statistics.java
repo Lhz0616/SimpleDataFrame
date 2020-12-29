@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Statistics implements InterfaceStatistics{
+public class Statistics {
 
     DataFrameReader r = new DataFrameReader();
     public static List<List<String>> COLUMNDATA = new ArrayList<>();;
@@ -45,7 +45,6 @@ public class Statistics implements InterfaceStatistics{
         }
     }
 
-    @Override
     public float[] variance() {
         float [] mean = mean();
         float [] variance = new float[mean.length];
@@ -60,7 +59,6 @@ public class Statistics implements InterfaceStatistics{
         return variance;
     }
 
-    @Override
     public float[] sd() {
         float [] variance = variance();
         float [] sd = new float[variance.length];
@@ -70,7 +68,6 @@ public class Statistics implements InterfaceStatistics{
         return sd;
     }
 
-    @Override
     public float[] min() {
         int minIndex = 0;
         float [] min = new float[calculate.size()];
@@ -85,7 +82,6 @@ public class Statistics implements InterfaceStatistics{
         return min;
     }
 
-    @Override
     public float[] max() {
         int maxIndex = 0;
         float [] max = new float[calculate.size()];
@@ -100,7 +96,6 @@ public class Statistics implements InterfaceStatistics{
         return max;
     }
 
-    @Override
     public float[] mean() {
         int size = calculate.size();
         float[] avg = new float[size];
@@ -111,12 +106,10 @@ public class Statistics implements InterfaceStatistics{
         return avg;
     }
 
-    @Override
     public float mode() {
         return 0;
     }
 
-    @Override
     public float[] median() {
         float [] medianArr = new float[calculate.size()];
         for(int i = 0; i<calculate.size(); i++){
@@ -135,7 +128,6 @@ public class Statistics implements InterfaceStatistics{
         return medianArr;
     }
 
-    @Override
     public float[] range() {
         float[] max = max();
         float [] min = min();
