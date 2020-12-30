@@ -42,10 +42,10 @@ public class Testing {
         String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
         final long startTime = System.nanoTime();
 
-        //DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
+        DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
         DataFrameReader r = new DataFrameReader();
-        r.readCSV(filePath);
-        //read.readDB();
+        //r.readCSV(filePath);
+        read.readDB();
         System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
         Statistics s1 = new Statistics();

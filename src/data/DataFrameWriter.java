@@ -12,16 +12,32 @@ import java.util.List;
 public class DataFrameWriter {
 
     /**
-     *
+     * {@code r} is an DataFrameReader to access the {@code DATA}
+     * {@code DATA} is needed to write all the data into the CSV file
      */
     DataFrameReader r = new DataFrameReader();
+
+    /**
+     * {@code fileName} is a variable to store the fileName that the user wanted
+     * The written file will be set to that name
+     * Example: fileName = "abc"
+     * Output file: abc.csv
+     */
     private String fileName;
 
+    /**
+     * This {@code writeCSV} has no arguments.
+     * The default fileName for the {@code writeCSV} is "DataFrame"
+     */
     public void writeCSV() {
         fileName = "DataFrame";
         writeCSV("DataFrame");
     }
 
+    /**
+     * This {@code writeCSV} has an argument, which is the name of the output file.
+     * @param name the name of the output file
+     */
     public void writeCSV(String name) {
         fileName = name;
 
@@ -55,6 +71,10 @@ public class DataFrameWriter {
 
     }
 
+    /**
+     * This method is used for getting the file Name
+     * @return the fileName of {@code String} type
+     */
     public String getFileName() {
         return fileName;
     }
