@@ -5,17 +5,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * {@code DataFrameWriter} is a class to write the {@code DATA} into a CSV file
+ * This class will create a DataFrameReader object to access the {@code DATA} variable
+ */
 public class DataFrameWriter {
 
-    DataFrameReader r;
+    /**
+     *
+     */
+    DataFrameReader r = new DataFrameReader();
     private String fileName;
 
     public void writeCSV() {
+        fileName = "DataFrame";
         writeCSV("DataFrame");
     }
 
     public void writeCSV(String name) {
-        r = new DataFrameReader();
         fileName = name;
 
         try {
@@ -36,7 +43,9 @@ public class DataFrameWriter {
                     writer.write(stringList.get(j));
                     if(j<stringList.size()-1) writer.write(",");
                     else writer.write("\n");
+
                 }
+
             }
             writer.close();
 
