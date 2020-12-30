@@ -5,13 +5,7 @@ import data.DataFrameWriter;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.*;
 
 public class DBWriter {
     DataFrameReader r = new DataFrameReader();

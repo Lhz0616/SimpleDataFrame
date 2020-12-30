@@ -1,7 +1,5 @@
 package data;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +8,8 @@ public class rowCol {
     DataFrameReader r = new DataFrameReader();
     List<List<String>> COLUMNDATA = new ArrayList<>();
 
-    private void changetocolumn() {
-        int numCols = r.DATA.get(1).size();
+    private void changeToColumn() {
+        int numCols = r.DATA.get(0).size();
         ArrayList<String> rowData = new ArrayList();
         for (int j = 0; j < numCols; j++) {
             rowData.clear();
@@ -39,7 +37,7 @@ public class rowCol {
 
 
     public void colRange(String[] category) {
-        changetocolumn();
+        changeToColumn();
         List<List<String>> colRange = new ArrayList<>();
         String[] header = r.DATA.get(0).toArray(new String[0]);
         int j = 0;
@@ -58,7 +56,8 @@ public class rowCol {
         System.out.println(colRange.toString());
     }
 
-
-
-
+    public List<List<String>> getCOLUMNDATA(){
+        changeToColumn();
+        return COLUMNDATA;
+    }
 }

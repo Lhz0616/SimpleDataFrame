@@ -11,7 +11,6 @@ public class DBReader extends DataFrameReader {
     private String tableName;
     private String dbName;
 
-    public DBReader(){}
 
     public DBReader(String dbName, String tableName, String username, String password){
         this.dbName = dbName;
@@ -45,9 +44,13 @@ public class DBReader extends DataFrameReader {
                 }
                 DATA.add(getData);
             }
+            stmt.close();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+
     }
 
     public String getDbName() {

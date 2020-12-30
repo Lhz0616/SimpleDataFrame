@@ -48,6 +48,7 @@ public class Testing {
         //read.readDB();
         System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
+        Statistics s1 = new Statistics();
         //rowCol rowRange= new rowCol();
         //rowCol.colRange(new String[]{"name", "salary"});
 
@@ -65,8 +66,8 @@ public class Testing {
             System.out.println(Arrays.toString(temp));
         }
 
-        DBWriter writer = new DBWriter();
-        writer.writeDB("jdbc:mysql://localhost/groupmemberdb", "newTable", "root", "");
+        //DBWriter writer = new DBWriter();
+        //writer.writeDB("jdbc:mysql://localhost/groupmemberdb", "newTable", "root", "");
 
         /*float [] sd = s.sd();
         float [] min = s.min();

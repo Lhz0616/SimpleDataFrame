@@ -1,6 +1,7 @@
 package math;
 
 import data.DataFrameReader;
+import data.rowCol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,41 +10,15 @@ import java.util.List;
 public class Statistics {
 
     DataFrameReader r = new DataFrameReader();
-    public static List<List<String>> COLUMNDATA = new ArrayList<>();;
+    public static List<List<String>> COLUMNDATA = new ArrayList<>();
+    rowCol rc = new rowCol();
     public static List<float[]> calculate = new ArrayList<>();
 
-    public Statistics() {
-
-        int numCols = r.DATA.get(1).size();
-        ArrayList<String> rowData = new ArrayList();
-        for(int j = 0; j<numCols; j++) {
-            rowData.clear();
-            for (int z = 1; z < r.DATA.size(); z++) {
-                String[] temp = r.DATA.get(z).toArray(new String[0]);
-                String temp1 = temp[j];
-                rowData.add(temp1);
-            }
-            COLUMNDATA.add((List<String>) rowData.clone());
-        }
-
-        for(int i = 0; i<COLUMNDATA.size(); i++) {
-            List<String> temp = COLUMNDATA.get(i);
-            float[] temp1 = new float[temp.size()];
-            int j = 0;
-            for (int start = 0; start < temp.size(); start++) {
-                String temp2 = temp.get(start);
-                if (isFloat(temp2)) {
-                    temp1[j] = Float.parseFloat(temp2);
-                    j++;
-                }
-            }
-            try {
-                calculate.add(temp1);
-            } catch (NullPointerException e) {
-                return;
-            }
-        }
+    public Statistics(){
+        COLUMNDATA = rc.getCOLUMNDATA();
+        calculate = changeToFloat();
     }
+
 
     public float[] variance() {
         float [] mean = mean();
@@ -140,23 +115,6 @@ public class Statistics {
         return range;
     }
 
-    private boolean isFloat(String str){
-        try{
-            Float.parseFloat(str);
-        } catch (NumberFormatException e){
-            return false;
-        }
-        return true;
-    }
-
-    private float sum(float [] numbers){
-        float sum = 0;
-        for(int first = 0; first<numbers.length; first++){
-            sum+= numbers[first];
-        }
-        return sum;
-    }
-
     public List<float[]> StandardScale(){
         float [] mean = mean();
         float [] sd = sd();
@@ -180,4 +138,46 @@ public class Statistics {
 
         return new float[]{};
     }
+
+    private boolean isFloat(String str){
+        try{
+            Float.parseFloat(str);
+        } catch (NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+
+    private float sum(float [] numbers){
+        float sum = 0;
+        for(int first = 0; first<numbers.length; first++){
+            sum+= numbers[first];
+        }
+        return sum;
+    }
+
+    private List<float[]> changeToFloat(){
+        List<float[]> floatN = new ArrayList<>();
+
+        for(int i = 0; i<COLUMNDATA.size(); i++) {
+            List<String> temp = COLUMNDATA.get(i);
+            float[] temp1 = new float[temp.size()];
+            int j = 0;
+            for (int start = 0; start < temp.size(); start++) {
+                String temp2 = temp.get(start);
+                if (isFloat(temp2)) {
+                    temp1[j] = Float.parseFloat(temp2);
+                    j++;
+                }
+            }
+            try {
+                floatN.add(temp1);
+            } catch (NullPointerException e) {
+
+            }
+
+        }
+        return floatN;
+    }
+
 }

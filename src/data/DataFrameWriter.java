@@ -36,9 +36,7 @@ public class DataFrameWriter {
                     writer.write(stringList.get(j));
                     if(j<stringList.size()-1) writer.write(",");
                     else writer.write("\n");
-
                 }
-
             }
             writer.close();
 
