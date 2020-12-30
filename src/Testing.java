@@ -45,7 +45,7 @@ public class Testing {
         DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
         DataFrameReader r = new DataFrameReader();
         //r.readCSV(filePath);
-        read.readDB();
+        //read.readDB();
         System.out.println(r.DATA.toString());
         Statistics s = new Statistics();
         Statistics s1 = new Statistics();
