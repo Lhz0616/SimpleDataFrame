@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
 
-
 /**
  * The {@code DBWriter} class will establish a connection to the database using the URL
  */
@@ -38,11 +37,19 @@ public class DBWriter {
     private String password;
 
     /**
-     * The {@code DBWriter}
-     * @param dbURL
-     * @param tableName
-     * @param user
-     * @param password
+     * The {@code DBWriter} is a constructor where establish a connection to the
+     * database using the user and password provided to access the database
+     *
+     * The {@code dbURL} should be in the format of "jdbc:mysql://localhost/<DATABASE_NAME>"
+     * The connection will establish the connection after you open XAMPP
+     *
+     * It will throw {@code ConnectionErrorException} when there is an error connecting
+     * to the database
+     *
+     * @param dbURL     the URL of the database
+     * @param tableName the name of a new table
+     * @param user      the user of the database
+     * @param password  the password of the database
      */
     public DBWriter(String dbURL, String tableName, String user, String password) {
         this.dbURL = dbURL;
@@ -51,25 +58,32 @@ public class DBWriter {
         this.password = password;
 
         try {
+            System.out.println("Trying to connect to the database : " + dbURL);
             conn = DriverManager.getConnection(dbURL, user, password);
             statement = conn.createStatement();
-        } catch (SQLException throwables) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
+
+        } catch (SQLException  throwables) {
+            try{
+                throw new ConnectionErrorException("There is an error connecting to the database. Please try again!");
+            } catch (ConnectionErrorException e) {
                 e.printStackTrace();
             }
-            throwables.printStackTrace();
+            System.exit(-1);
         }
     }
 
+    /**
+     * This is the {@code writeDB} where it will export a CSV file and then it will add
+     * all the data into a sentence
+     * It will then execute the SQL statement and update the table with the row of data
+     */
     public void writeDB() {
 
         String state = "CREATE TABLE " + tableName + "(";
 
-        for (int i = 0; i < r.header.length; i++) {
-            if (i == r.header.length - 1) state += r.header[i] + " VARCHAR(255) ";
-            else state += r.header[i] + " VARCHAR(255), ";
+        for (int i = 0; i < r.header.size(); i++) {
+            if (i == r.header.size() - 1) state += r.header.get(i) + " VARCHAR(255) ";
+            else state += r.header.get(i) + " VARCHAR(255), ";
         }
 
         state += ")";

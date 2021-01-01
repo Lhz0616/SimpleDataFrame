@@ -45,9 +45,9 @@ public class DataFrameWriter {
             FileWriter writer = new FileWriter(new File(name+".csv"));
 
             // put the header into the file
-            for(int z = 0; z<r.header.length; z++){
-                writer.write(r.header[z]);
-                if(z<r.header.length-1) writer.write(",");
+            for(int z = 0; z<r.header.size(); z++){
+                writer.write(String.valueOf(r.header));
+                if(z<r.header.size()-1) writer.write(",");
                 else writer.write("\n");
             }
 

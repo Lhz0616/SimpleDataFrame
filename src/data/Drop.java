@@ -1,5 +1,4 @@
 package data;
-package data;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,14 +9,14 @@ public class Drop {
     DataFrameReader dfr = new DataFrameReader();
 
     public void dropDuplicate(String[] category, int num) {
-        String[] header = dfr.header;
+        List<String> header = dfr.header;
         int[] a = new int[category.length];
         int counter = 0;
         String duplicate = "";
         for (int i = 0; i < category.length; i++) {
 
-            for (int j = 0; j < dfr.header.length; j++) {
-                if (category[i].equals(header[j])) {
+            for (int j = 0; j < dfr.header.size(); j++) {
+                if (category[i].equals(header.get(j))) {
                     a[i] = j;
 
                 }
@@ -57,12 +56,12 @@ public class Drop {
     }
 
     public void dropNull(String[] category) {
-        String[] header = dfr.header;
+        List<String> header = dfr.header;
         int counter = 0;
         int[] a = new int[category.length];
         for (int i = 0; i < category.length; i++) {
-            for (int j = 0; j < dfr.header.length; j++) {
-                if (category[i].equals(header[j])) {
+            for (int j = 0; j < dfr.header.size(); j++) {
+                if (category[i].equals(header.size())) {
                     a[i] = j;
                 }
             }

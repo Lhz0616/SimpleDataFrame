@@ -34,7 +34,7 @@ public class DBReader extends DataFrameReader {
      * @param dbName    the name of the database where you want to access the data
      * @param tableName the name of the table
      * @param user      the user of the database that you want to connect to
-     * @param password  the password of the user (Don't ask me I do not know it xd)
+     * @param password  the password of the user
      */
     public DBReader(String dbName, String tableName, String user, String password){
         this.dbName = dbName;

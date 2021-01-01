@@ -1,30 +1,31 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+/**
+ * {@code rowCol} is a class that can carry out functions that are related to row and column
+ */
 public class rowCol {
 
-    DataFrameReader r = new DataFrameReader();
-    List<List<String>> COLUMNDATA = new ArrayList<>();
+    /**
+     * {@code r} is a {@code DataFrameReader} that is used to access the {@code DATA}
+     */
+    private DataFrameReader r = new DataFrameReader();
 
-    private void changeToColumn() {
-        int numCols = r.DATA.get(0).size();
-        ArrayList<String> rowData = new ArrayList();
-        for (int j = 0; j < numCols; j++) {
-            rowData.clear();
-            for (int z = 1; z < r.DATA.size(); z++) {
-                String[] temp = r.DATA.get(z).toArray(new String[0]);
-                String temp1 = temp[j];
-                rowData.add(temp1);
-            }
-            COLUMNDATA.add((List<String>) rowData.clone());
-        }
-    }
+    /**
+     * {@code COLUMNDATA} is used to store the dataframe by column
+     */
+    public static List<List<String>> COLUMNDATA = new ArrayList<>();
 
+    /**
+     * {@code rowRange} is used to display the row between the range that the user wants
+     *
+     * @param x the first index (included)
+     * @param y the last index  (excluded)
+     */
     public void rowRange(int x, int y) {
-        x = x + 1;
-        y = y + 1;
         List<List<String>> rowRange = new ArrayList<>();
         //add header
         rowRange.add(r.DATA.get(0));
@@ -36,6 +37,13 @@ public class rowCol {
     }
 
 
+    /**
+     * {@code colRange} is a method that will accept an Array of {@code String}
+     * which will be the column that wanted to be display
+     * This method will print out the data by column
+     *
+     * @param category the column that wanted to be displayed
+     */
     public void colRange(String[] category) {
         changeToColumn();
         List<List<String>> colRange = new ArrayList<>();
@@ -56,8 +64,82 @@ public class rowCol {
         System.out.println(colRange.toString());
     }
 
-    public List<List<String>> getCOLUMNDATA(){
+    /**
+     * {@code getCOLUMNDATA} is a method to get the COLUMNDATA
+     * It will always update the newest data with changeToColumn()
+     *
+     * @return List<List < String>> of the COLUMNDATA
+     */
+    public List<List<String>> getCOLUMNDATA() {
         changeToColumn();
         return COLUMNDATA;
+    }
+
+    /**
+     * {@code concatRow} is a method used to add a new row to {@code DATA} in the
+     * {@code DataFrameReader}
+     *
+     * @param row the data that will be added to the {@code DATA}
+     *            **take note that it must be the same number of column**
+     */
+    public void concatRow(String[] row) {
+        try {
+            if (row.length != r.DATA.get(0).size()) {
+                throw new UnequalNumberException("The number of columns are not equal!");
+            } else {
+                List<String> temp = Arrays.asList(row);
+                r.DATA.add(temp);
+            }
+        } catch (UnequalNumberException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
+    /**
+     * {@code concatColumn} is used to add a new column to the dataframe
+     *
+     * @param column    An Array input by the user (the first index of the array is
+     *                  the header)
+     */
+    public void concatColumn(String[] column) {
+        try {
+            if(column.length != r.DATA.size()+1){
+                throw new UnequalNumberException("The number of row is not equal!!");
+            }else {
+                r.header.add(column[0]);
+
+                for (int i = 1; i <=r.DATA.size(); i++) {
+                    if(column[i].equals("")){
+                        List<String> temp = r.DATA.get(i - 1);
+                        temp.add(" ");
+                    }else {
+                        List<String> temp = r.DATA.get(i - 1);
+                        temp.add(column[i]);
+                    }
+                }
+            }
+        } catch(UnequalNumberException e){
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
+    /**
+     * This is a private method which will change the {@code DATA} by column
+     * and save into {@code COLUMNDATA}
+     */
+    private void changeToColumn() {
+        int numCols = r.DATA.get(0).size();
+        ArrayList<String> rowData = new ArrayList();
+        for (int j = 0; j < numCols; j++) {
+            rowData.clear();
+            for (int z = 1; z < r.DATA.size(); z++) {
+                String[] temp = r.DATA.get(z).toArray(new String[0]);
+                String temp1 = temp[j];
+                rowData.add(temp1);
+            }
+            COLUMNDATA.add((List<String>) rowData.clone());
+        }
     }
 }

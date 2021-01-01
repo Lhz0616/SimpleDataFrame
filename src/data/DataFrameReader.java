@@ -34,7 +34,7 @@ public class DataFrameReader{
      * This will be the header of the data
      * It will not change unless you use {@code concatColumn}
      */
-    public static String [] header;
+    public static List<String> header ;
 
     /**
      * This is the {@code readCSV} method where it will accept the filePath of the CSV file
@@ -71,13 +71,14 @@ public class DataFrameReader{
 
             while ((line = br.readLine()) != null) {
                 if(i == 0) {
-                    header = line.split(String.valueOf(separator));
+                    header = new ArrayList<>(Arrays.asList(line.split(String.valueOf(separator))));
                     i++;
                     continue;
                 }
                 List<String> values = new ArrayList(Arrays.asList(line.split(String.valueOf(separator))));
                 DATA.add(values);
             }
+
         } catch (Exception e) {
             System.out.println(e);
         }
