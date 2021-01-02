@@ -9,14 +9,14 @@ public class Drop {
     DataFrameReader dfr = new DataFrameReader();
 
     public void dropDuplicate(String[] category, int num) {
-        List<String> header = dfr.header;
+        String[] header = dfr.header;
         int[] a = new int[category.length];
         int counter = 0;
         String duplicate = "";
         for (int i = 0; i < category.length; i++) {
 
-            for (int j = 0; j < dfr.header.size(); j++) {
-                if (category[i].equals(header.get(j))) {
+            for (int j = 0; j < dfr.header.length; j++) {
+                if (category[i].equals(header[j])) {
                     a[i] = j;
 
                 }
@@ -56,22 +56,22 @@ public class Drop {
     }
 
     public void dropNull(String[] category) {
-        List<String> header = dfr.header;
+        String[] header = dfr.header;
         int counter = 0;
         int[] a = new int[category.length];
         for (int i = 0; i < category.length; i++) {
-            for (int j = 0; j < dfr.header.size(); j++) {
-                if (category[i].equals(header.size())) {
+            for (int j = 0; j < dfr.header.length; j++) {
+                if (category[i].equals(header[j])) {
                     a[i] = j;
                 }
             }
         }
         List<String> arr = new ArrayList<>();
-        ArrayList<Integer> NUll=new ArrayList<>();
+        ArrayList<Integer> NUll = new ArrayList<>();
         //for every category detected and saved in array a
         for (int i = 0; i < a.length; i++) {
             //get column and store in a list
-            for (int j = 0; j <dfr.DATA.size(); j++) {
+            for (int j = 0; j < dfr.DATA.size(); j++) {
                 arr.add(dfr.DATA.get(j).get(a[i]));
             }
             //for every element in list find duplicate and remove the duplicate row based on the num
@@ -92,7 +92,6 @@ public class Drop {
         }
         System.out.println(dfr.DATA.toString());
     }
-
     private int getFrequentNumber(ArrayList<Integer> arr){
         int popular = arr.get(0);
         int count = 1;
@@ -114,4 +113,6 @@ public class Drop {
         return popular;
     }
 }
+
+
 
