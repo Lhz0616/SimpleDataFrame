@@ -142,4 +142,25 @@ public class rowCol {
             COLUMNDATA.add((List<String>) rowData.clone());
         }
     }
+    
+     public void Fill_missing(String column,String[]values){
+        String[] header = r.header;
+        int a=0,frequancy=0;
+        for (int j = 0; j < r.header.length; j++) {
+                if (column.equals(header[j])) {
+                    a = j;
+                }
+        }
+        List<String> arr = new ArrayList<String>();
+        for(int j=0;j<r.DATA.size();j++){
+            arr.add(r.DATA.get(j).get(a));
+        }
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i)==""){
+                r.DATA.get(i).set(a,values[frequancy]);
+                frequancy++;
+            }
+        }
+        System.out.println(r.DATA.toString());
+    }
 }
