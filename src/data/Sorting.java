@@ -11,8 +11,8 @@ public class Sorting {
 
     public void sortAsc(String column) {
         //for-loop to locate the index of column to be sorted
-        for (int i = 0; i < DataFrameReader.header.length; i++) {
-            if (DataFrameReader.header[i].equalsIgnoreCase(column)) {
+        for (int i = 0; i < r.header.size(); i++) {
+            if (r.header.get(i).equalsIgnoreCase(column)) {
                 index = i;
             }
         }
@@ -40,8 +40,8 @@ public class Sorting {
 
     public void sortDesc(String column) {
         //for-loop to locate the index of column to be sorted
-        for (int i = 0; i < DataFrameReader.header.length; i++) {
-            if (DataFrameReader.header[i].equalsIgnoreCase(column)) {
+        for (int i = 0; i < DataFrameReader.header.size(); i++) {
+            if (r.header.get(i).equalsIgnoreCase(column)) {
                 index = i;
             }
         }
