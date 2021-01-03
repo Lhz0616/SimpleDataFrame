@@ -130,11 +130,11 @@ public class rowCol {
      * and save into {@code COLUMNDATA}
      */
     private void changeToColumn() {
-        int numCols = r.DATA.get(0).size();
+        int numCols = r.header.size();
         ArrayList<String> rowData = new ArrayList();
         for (int j = 0; j < numCols; j++) {
             rowData.clear();
-            for (int z = 1; z < r.DATA.size(); z++) {
+            for (int z = 0; z < r.DATA.size(); z++) {
                 String[] temp = r.DATA.get(z).toArray(new String[0]);
                 String temp1 = temp[j];
                 rowData.add(temp1);
@@ -142,12 +142,19 @@ public class rowCol {
             COLUMNDATA.add((List<String>) rowData.clone());
         }
     }
-    
+
+    /**
+     * {@code Fill_missing} will accept the index of column and an Array of values to fill in
+     * the cell that are empty
+     *
+     * @param column    the index of column
+     * @param values    an Array of values to fill in the empty cell
+     */
      public void Fill_missing(String column,String[]values){
-        String[] header = r.header;
+        List<String> header = r.header;
         int a=0,frequancy=0;
-        for (int j = 0; j < r.header.length; j++) {
-                if (column.equals(header[j])) {
+        for (int j = 0; j < r.header.size(); j++) {
+                if (column.equals(header.get(j))) {
                     a = j;
                 }
         }
@@ -163,4 +170,6 @@ public class rowCol {
         }
         System.out.println(r.DATA.toString());
     }
+
+
 }

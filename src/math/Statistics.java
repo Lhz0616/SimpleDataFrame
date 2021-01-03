@@ -5,7 +5,6 @@ import data.rowCol;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 /**
  * {@code Statistics} will be the class that can perform all the mathematical operations
  * {@code mean, variance, standard deviation, mode, median}
@@ -37,7 +36,7 @@ public class Statistics {
      */
     public Statistics(){
         COLUMNDATA = rc.getCOLUMNDATA();
-        calculate = changeToFloat();
+        changeToFloat();
     }
 
 
@@ -46,7 +45,7 @@ public class Statistics {
      *
      * @return an Array of {@code float} numbers (by column)
      */
-    public float[] variance() {
+    public static float[] variance() {
         float [] mean = mean();
         float [] variance = new float[mean.length];
 
@@ -65,7 +64,7 @@ public class Statistics {
      *
      * @return an Array of {@code float} numbers (by column)
      */
-    public float[] sd() {
+    public static float[] sd() {
         float [] variance = variance();
         float [] sd = new float[variance.length];
         for(int i = 0; i<sd.length; i++){
@@ -79,7 +78,7 @@ public class Statistics {
      *
      * @return an Array of {@code float} numbers
      */
-    public float[] min() {
+    public static float[] min() {
         int minIndex = 0;
         float [] min = new float[calculate.size()];
         for(int i = 0; i<calculate.size(); i++){
@@ -98,7 +97,7 @@ public class Statistics {
      *
      * @return an Array of {@code float} numbers
      */
-    public float[] max() {
+    public static float[] max() {
         int maxIndex = 0;
         float [] max = new float[calculate.size()];
         for(int i = 0; i<calculate.size(); i++){
@@ -117,7 +116,7 @@ public class Statistics {
      *
      * @return an Array of mean of the columns in {@code float}
      */
-    public float[] mean() {
+    public static float[] mean() {
         int size = calculate.size();
         float[] avg = new float[size];
 
@@ -128,6 +127,7 @@ public class Statistics {
     }
 
     public float mode() {
+        System.out.println("hello");
         return 0;
     }
 
@@ -136,7 +136,7 @@ public class Statistics {
      *
      * @return  an Array of median of the columns in {@code float}
      */
-    public float[] median() {
+    public static float[] median() {
         float [] medianArr = new float[calculate.size()];
         for(int i = 0; i<calculate.size(); i++){
             float [] temp = calculate.get(i);
@@ -160,7 +160,7 @@ public class Statistics {
      *
      * @return an Array of the range by columns in {@code float}
      */
-    public float[] range() {
+    public static float[] range() {
         float[] max = max();
         float [] min = min();
         float [] range = new float[calculate.size()];
@@ -172,33 +172,41 @@ public class Statistics {
         return range;
     }
 
-    /**
-     * {@code StandardScale} is a method to find the scaling of the dataframe by columns
-     *
-     * @return a List of float arrays of the value of the scalers by column
-     */
-    public List<float[]> StandardScale(){
-        float [] mean = mean();
-        float [] sd = sd();
-        List<float[]> sdScale = new ArrayList<>();
+    public static float[] interquartile(){
+        float [] interquartile = new float[calculate.size()];
 
-        int z = 0;
-        for(int i = 0; i< calculate.size(); i++){
-            float [] insert = new float[calculate.get(i).length];
+        for(int i = 0; i<calculate.size(); i++){
             float[] temp = calculate.get(i);
-            for(int j = 0; j<temp.length; j++){
-                insert[j] = (temp[j] - mean[z]) / sd[z];
+            Arrays.sort(temp);
+            if((temp.length+1)%4 == 0){
+                int firstQuartTerm = (temp.length + 1) / 4;
+                int thirdQuartTerm = (temp.length + 1) * 3 /4;
+                float quartileRange = temp[thirdQuartTerm] - temp[firstQuartTerm];
+                interquartile[i] = quartileRange;
             }
-
-            z++;
-            sdScale.add(insert);
+            else{
+                int firstQuartTerm = (int) Math.floor((temp.length + 1) / 4) - 1;
+                int thirdQuartTerm = (int) Math.floor((temp.length + 1) * 3 / 4) - 1;
+                float firstQuart = (temp[firstQuartTerm] + temp[firstQuartTerm + 1] )/ 2;
+                float thirdQuart = (temp[thirdQuartTerm] + temp[thirdQuartTerm + 1]) / 2;
+                interquartile[i] = thirdQuart - firstQuart;
+            }
         }
-        return sdScale;
+        return interquartile;
     }
 
-    public float[] minMaxScaling(){
-
-        return new float[]{};
+    /**
+     * {@code sum} is used to calculate the sum of the data by column
+     *
+     * @param numbers   an Array that has been converted to {@code float}
+     * @return          a sum with the type of {@code float}
+     */
+    private static float sum(float [] numbers){
+        float sum = 0;
+        for(int first = 0; first<numbers.length; first++){
+            sum+= numbers[first];
+        }
+        return sum;
     }
 
     /**
@@ -208,7 +216,7 @@ public class Statistics {
      * @param   str the String from the {@code COLUMNDATA}
      * @return  a boolean that determine whether it is able to convert
      */
-    private boolean isFloat(String str){
+    private static boolean isFloat(String str){
         try{
             Float.parseFloat(str);
         } catch (NumberFormatException e){
@@ -218,25 +226,11 @@ public class Statistics {
     }
 
     /**
-     * {@code sum} is used to calculate the sum of the data by column
-     *
-     * @param numbers   an Array that has been converted to {@code float}
-     * @return          a sum with the type of {@code float}
-     */
-    private float sum(float [] numbers){
-        float sum = 0;
-        for(int first = 0; first<numbers.length; first++){
-            sum+= numbers[first];
-        }
-        return sum;
-    }
-
-    /**
      *
      *
      * @return
      */
-    private List<float[]> changeToFloat(){
+    private static void changeToFloat(){
         List<float[]> floatN = new ArrayList<>();
 
         for(int i = 0; i<COLUMNDATA.size(); i++) {
@@ -257,7 +251,7 @@ public class Statistics {
             }
 
         }
-        return floatN;
+        calculate = floatN;
     }
 
 }

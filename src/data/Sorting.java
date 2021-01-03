@@ -4,11 +4,27 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * {@code Sorting} is a class that will conduct the sorting method according to
+ * the column that the user want
+ */
 public class Sorting {
 
+    /**
+     * {@code r} is used to access the dataframe
+     */
     DataFrameReader r = new DataFrameReader();
+
+    /**
+     * {@code index} is used to save the index the user input
+     */
     private static int index = 0;
 
+    /**
+     * {@code sortAsc} is used to sort the selected column in ascending order
+     *
+     * @param column    the column that wanted to be sort
+     */
     public void sortAsc(String column) {
         //for-loop to locate the index of column to be sorted
         for (int i = 0; i < r.header.size(); i++) {
@@ -38,6 +54,11 @@ public class Sorting {
         }
     }
 
+    /**
+     * {@code sortDesc} is used to sort the selected column in descending order
+     *
+     * @param column    the column that wanted to be sort
+     */
     public void sortDesc(String column) {
         //for-loop to locate the index of column to be sorted
         for (int i = 0; i < DataFrameReader.header.size(); i++) {
@@ -68,6 +89,11 @@ public class Sorting {
         }
     }
 
+    /**
+     * {@code sortNumberAsc} is a method to sort the column that have
+     * @param DATA
+     * @return
+     */
     public List<List<String>> sortNumberAsc(List<List<String>> DATA) {
         //create a customized comparator that compare Double value parsed from String
         Comparator<List<String>> comparator = new Comparator<List<String>>() {
