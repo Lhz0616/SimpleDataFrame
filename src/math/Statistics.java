@@ -21,7 +21,7 @@ public class Statistics {
     /**
      * {@code rc} is used to access the {@code getCOLUMNDATA} method to get COLUMNDATA
      */
-    rowCol rc = new rowCol();
+    static rowCol rc = new rowCol();
 
     /**
      * {@code calculate} is the variable to store the float number that is available in the
@@ -30,16 +30,12 @@ public class Statistics {
     public static List<float[]> calculate = new ArrayList<>();
 
     /**
-     * {@code Statistics} constructor will get the COLUMNDATA from the rowCol class
-     * and it will conduct the {@code changeToFloat} method to store all the
-     * numbers that can convert to float number into the {@code calculate}
+     *
      */
-    public Statistics(){
+    static {
         COLUMNDATA = rc.getCOLUMNDATA();
         changeToFloat();
     }
-
-
     /**
      * {@code variance} will calculate the variance by column from the {@code calculate} ArrayList
      *
@@ -81,7 +77,7 @@ public class Statistics {
     public static float[] min() {
         int minIndex = 0;
         float [] min = new float[calculate.size()];
-        for(int i = 0; i<calculate.size(); i++){
+        for(int i = 0; i< calculate.size(); i++){
             float [] temp = calculate.get(i);
             for(int j = 0; j<temp.length; j++){
                 if(temp[j]<temp[minIndex]) minIndex = j;
@@ -100,7 +96,7 @@ public class Statistics {
     public static float[] max() {
         int maxIndex = 0;
         float [] max = new float[calculate.size()];
-        for(int i = 0; i<calculate.size(); i++){
+        for(int i = 0; i< calculate.size(); i++){
             float [] temp = calculate.get(i);
             for(int j = 0; j<temp.length; j++){
                 if(temp[j]>temp[maxIndex]) maxIndex = j;
@@ -120,8 +116,8 @@ public class Statistics {
         int size = calculate.size();
         float[] avg = new float[size];
 
-        for(int j = 0; j<calculate.size(); j++){
-            avg[j] = sum(calculate.get(j))/calculate.get(j).length;
+        for(int j = 0; j< calculate.size(); j++){
+            avg[j] = sum(calculate.get(j))/ calculate.get(j).length;
         }
         return avg;
     }
@@ -138,7 +134,7 @@ public class Statistics {
      */
     public static float[] median() {
         float [] medianArr = new float[calculate.size()];
-        for(int i = 0; i<calculate.size(); i++){
+        for(int i = 0; i< calculate.size(); i++){
             float [] temp = calculate.get(i);
             Arrays.sort(temp);
             if(temp.length%2 == 1){
@@ -172,10 +168,15 @@ public class Statistics {
         return range;
     }
 
+    /**
+     * {@code interquartile} is a method that will sort the {@code calculate} and calculate the interquartile range
+     *
+     * @return  an Array of {@code float} (take note that it will output the float number in ascending order
+     */
     public static float[] interquartile(){
         float [] interquartile = new float[calculate.size()];
 
-        for(int i = 0; i<calculate.size(); i++){
+        for(int i = 0; i< calculate.size(); i++){
             float[] temp = calculate.get(i);
             Arrays.sort(temp);
             if((temp.length+1)%4 == 0){
@@ -226,9 +227,9 @@ public class Statistics {
     }
 
     /**
+     * {@code changeToFloat} is a private method that will check for data that can change to {@code float} and
+     * save into {@code calculate}
      *
-     *
-     * @return
      */
     private static void changeToFloat(){
         List<float[]> floatN = new ArrayList<>();

@@ -1,13 +1,10 @@
 import data.DataFrameReader;
-import data.rowCol;
-import math.Scalers;
 import math.Statistics;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+import static math.Scalers.*;
 
 // Object
 
@@ -46,6 +43,7 @@ public class Testing {
         //read.readDB();
 
         System.out.println(r.DATA.toString());
+
         Statistics s = new Statistics();
         System.out.println(s.COLUMNDATA.toString());
 
@@ -54,8 +52,10 @@ public class Testing {
 
         System.out.println(Arrays.toString(median));
         System.out.println(Arrays.toString(interquartile) + "\n");
-        Scalers sc = new Scalers();
-        sc.robustScale();
+        robustScale();
+        standardScale();
+        minMaxScaling();
+        System.out.println(s.COLUMNDATA.toString());
 
         //rowCol rowRange= new rowCol();
         //rowCol.colRange(new String[]{"name", "salary"});
