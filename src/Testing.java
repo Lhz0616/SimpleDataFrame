@@ -1,4 +1,5 @@
 import data.DataFrameReader;
+import data.rowCol;
 import math.Statistics;
 
 import java.io.IOException;
@@ -49,6 +50,7 @@ public class Testing {
 
         float [] median = s.median();
         float [] interquartile = s.interquartile();
+        rowCol rc = new rowCol();
 
         System.out.println(Arrays.toString(median));
         System.out.println(Arrays.toString(interquartile) + "\n");
