@@ -3,9 +3,12 @@ package data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class Drop {
     DataFrameReader dfr = new DataFrameReader();
+    private int i;
 
     public void dropDuplicate(String[] category, int num) {
         List<String> header = dfr.header;
@@ -17,8 +20,8 @@ public class Drop {
             for (int j = 0; j < dfr.header.size(); j++) {
                 if (category[i].equals(header.get(j))) {
                     a[i] = j;
-
                 }
+
             }
         }
         List<String> arr = new ArrayList<String>();
@@ -73,7 +76,7 @@ public class Drop {
             for (int j = 0; j < dfr.DATA.size(); j++) {
                 arr.add(dfr.DATA.get(j).get(a[i]));
             }
-            //for every element in list find duplicate and remove the duplicate row based on the num
+
             for (int k = 0; k < arr.size(); k++) {
                 if (arr.get(k).equals(" ")) {
                     NUll.add(k);
@@ -83,35 +86,31 @@ public class Drop {
             arr.clear();
             counter = 0;
         }
-        int popular=getFrequentNumber(NUll);
-        int occurrences = Collections.frequency(NUll,popular);
-        if(occurrences== category.length){
-            dfr.DATA.remove(popular);
 
+
+        ArrayList<Integer> popular = new ArrayList<>();
+        popular = getFrequentNumber(NUll, category.length);
+        ArrayList<List<String>> word=new ArrayList<>();
+        for(int i=0;i< popular.size();i++) {
+            word.add(dfr.DATA.get(popular.get(i)));
         }
+        dfr.DATA.removeAll(word);
         System.out.println(dfr.DATA.toString());
     }
-    private int getFrequentNumber(ArrayList<Integer> arr){
-        int popular = arr.get(0);
-        int count = 1;
-        int tempcount = 0;
-        int temp = 0;
 
-        for(int i = 0; i < arr.size(); i++) {
-            temp = arr.get(i);
-            tempcount = 0;
-            for(int j = 1; j < arr.size(); j++) {
-                if(temp == arr.get(j))
-                    tempcount++;
-            }
-            if (tempcount > count) {
-                popular = temp;
-                count = tempcount;
+    private ArrayList<Integer> getFrequentNumber(ArrayList<Integer> arr, int y) {
+        ArrayList<Integer> Nothing = new ArrayList<>();
+        int occurrences = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            occurrences = Collections.frequency(arr, arr.get(i));
+            if (occurrences == y) {
+                Nothing.add(arr.get(i));
             }
         }
-        return popular;
+        List<Integer>newlist=Nothing.stream().distinct().collect(Collectors.toList());
+        ArrayList<Integer> listOfStrings = new ArrayList<>(newlist.size());
+        listOfStrings.addAll(newlist);
+        return listOfStrings;
     }
 }
-
-
 
