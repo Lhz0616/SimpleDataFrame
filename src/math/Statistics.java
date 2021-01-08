@@ -17,7 +17,7 @@ public class Statistics {
     /**
      * {@code COLUMNDATA} is used to store the data in the column
      */
-    public static List<List<String>> COLUMNDATA = new ArrayList<>();
+    private static List<List<String>> COLUMNDATA = new ArrayList<>();
 
     /**
      * {@code rc} is used to access the {@code getCOLUMNDATA} method to get COLUMNDATA
@@ -31,7 +31,8 @@ public class Statistics {
     public static List<float[]> calculate = new ArrayList<>();
 
     /**
-     *
+     * This is a static block where it will get the {@code COLUMNDATA} from the
+     * {@code rowCol} and add all the data that can change to float into {@code calculate}
      */
     static {
         COLUMNDATA = rc.getCOLUMNDATA();
@@ -125,8 +126,13 @@ public class Statistics {
     }
 
 
+    /**
+     * {@code mode} is a method where it will find the data that occurs the most time in the column
+     * take note that it will only return the first mode
+     *
+     * @return  an Array of {@code String} that will show the mode
+     */
     public static String[] mode() {
-//        System.out.println(COLUMNDATA);
         int numCol = COLUMNDATA.size();
         String[] Mode = new String[numCol];
 

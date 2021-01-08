@@ -1,6 +1,6 @@
 package sql;
 
-import data.DataFrameReader;
+import static data.DataFrameReader.*;
 import data.DataFrameWriter;
 
 import java.io.BufferedReader;
@@ -11,10 +11,6 @@ import java.sql.*;
  * The {@code DBWriter} class will establish a connection to the database using the URL
  */
 public class DBWriter {
-    /**
-     * {@code r} is a DataFrameReader created to access the {@code DATA}
-     */
-    DataFrameReader r = new DataFrameReader();
 
     /**
      * {@code write} is a DataFrameWriter which is used to access the writeCSV method
@@ -46,10 +42,10 @@ public class DBWriter {
      * It will throw {@code ConnectionErrorException} when there is an error connecting
      * to the database
      *
-     * @param dbURL     the URL of the database
-     * @param tableName the name of a new table
-     * @param user      the user of the database
-     * @param password  the password of the database
+     * @param dbURL
+     * @param tableName
+     * @param user
+     * @param password
      */
     public DBWriter(String dbURL, String tableName, String user, String password) {
         this.dbURL = dbURL;
@@ -76,14 +72,18 @@ public class DBWriter {
      * This is the {@code writeDB} where it will export a CSV file and then it will add
      * all the data into a sentence
      * It will then execute the SQL statement and update the table with the row of data
+     * @param s
+     * @param newTable
+     * @param root
+     * @param s1
      */
-    public void writeDB() {
+    public void writeDB(String s, String newTable, String root, String s1) {
 
         String state = "CREATE TABLE " + tableName + "(";
 
-        for (int i = 0; i < r.header.size(); i++) {
-            if (i == r.header.size() - 1) state += r.header.get(i) + " VARCHAR(255) ";
-            else state += r.header.get(i) + " VARCHAR(255), ";
+        for (int i = 0; i < header.size(); i++) {
+            if (i == header.size() - 1) state += header.get(i) + " VARCHAR(255) ";
+            else state += header.get(i) + " VARCHAR(255), ";
         }
 
         state += ")";

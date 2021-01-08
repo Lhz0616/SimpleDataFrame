@@ -69,6 +69,10 @@ public class DBReader extends DataFrameReader {
             ResultSet set = stmt.executeQuery("select * from " + tableName);
             ResultSetMetaData md = set.getMetaData();
 
+            for(int i = 1; i<=md.getColumnCount(); i++){
+                header.add(md.getColumnName(i));
+            }
+
             while(set.next()){
                 List<String> getData = new ArrayList<>();
                 for(int j = 1; j<=md.getColumnCount() ; j++){

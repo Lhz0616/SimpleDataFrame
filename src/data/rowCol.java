@@ -12,7 +12,7 @@ public class rowCol {
     /**
      * {@code r} is a {@code DataFrameReader} that is used to access the {@code DATA}
      */
-    private DataFrameReader r = new DataFrameReader();
+    private static DataFrameReader r = new DataFrameReader();
 
     /**
      * {@code COLUMNDATA} is used to store the dataframe by column
@@ -47,7 +47,7 @@ public class rowCol {
     public void colRange(String[] category) {
         changeToColumn();
         List<List<String>> colRange = new ArrayList<>();
-        String[] header = r.DATA.get(0).toArray(new String[0]);
+        String[] header = r.header.toArray(new String[0]);
         int j = 0;
         for (int i = 0; i < COLUMNDATA.size(); i++) {
             //for (int a=0; a<COLUMNDATA.size(); a++){
