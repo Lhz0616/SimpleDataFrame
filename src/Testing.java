@@ -35,12 +35,11 @@ public class Testing {
 
 
         String filepath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DonaldProjectUpdated\\src\\Book1.csv";
-
         DataFrameReader rd =new DataFrameReader();
         rd.readCSV(filepath);
 
         Sorting st = new Sorting();
-        st.sort("Age", "ascending");
+        st.sort("Name", "descending");
 
     }
 }
