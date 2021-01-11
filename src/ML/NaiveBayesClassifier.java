@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import static com.ML.K_NearestNeighbours.*;
+import static ML.K_NearestNeighbours.*;
 
 public class NaiveBayesClassifier {
     //Get the specified index of column of dataset in type double, index 0 = first column
