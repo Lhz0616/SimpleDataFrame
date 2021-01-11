@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GroupAssignment.iml" filepath="$PROJECT_DIR$/GroupAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleDataFrame.iml" filepath="$PROJECT_DIR$/SimpleDataFrame.iml" />
     </modules>
   </component>
 </project>

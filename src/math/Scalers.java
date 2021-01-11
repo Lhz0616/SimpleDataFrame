@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static data.DataFrameReader.*;
 import static math.Statistics.*;
 
 public class Scalers {
@@ -29,12 +30,7 @@ public class Scalers {
             z++;
             sdScale.add(insert);
         }
-        for(int first = 0; first< sdScale.size(); first++){
-            float [] temp = sdScale.get(first);
-            if(first < sdScale.size()-1 ) System.out.print(Arrays.toString(temp) + ", ");
-            else System.out.print(Arrays.toString(temp));
-        }
-        System.out.println();
+        System.out.println(print(sdScale));
 
     }
 
@@ -48,7 +44,7 @@ public class Scalers {
      * If you want to remove the outliers to have a result, see here also.
      * @See robustScale()
      */
-    public static void minMaxScaling(){
+    public static void minMaxScale(){
         float [] range = range();
         float [] min = min();
         List<float[]> minMaxScale = new ArrayList<>();
@@ -65,12 +61,7 @@ public class Scalers {
             minMaxScale.add(insert);
         }
 
-        for(int first = 0; first< minMaxScale.size(); first++){
-            float [] temp = minMaxScale.get(first);
-            if(first < minMaxScale.size()-1 ) System.out.print(Arrays.toString(temp) + ", ");
-            else System.out.print(Arrays.toString(temp));
-        }
-        System.out.println();
+        System.out.println(print(minMaxScale));
     }
 
     /**
@@ -98,11 +89,29 @@ public class Scalers {
             robustScale.add(insert);
         }
 
-        for(int first = 0; first< robustScale.size(); first++){
-            float [] temp = robustScale.get(first);
-            if(first < robustScale.size()-1 ) System.out.print(Arrays.toString(temp) + ", ");
-            else System.out.print(Arrays.toString(temp));
+        System.out.println(print(robustScale));
+    }
+
+    private static String print(List<float[]> scale){
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i< header.size(); i++){
+            sb.append(String.format("%-20s", header.get(i)));
         }
-        System.out.println();
+        sb.append("\n");
+
+        int size = scale.get(0).length;
+
+        for(int i = 0; i<size; i++){
+
+            for(int j = 0; j< scale.size(); j++){
+                float[] temp = scale.get(j);
+                sb.append(String.format("%-20s", temp[i]));
+            }
+
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 }
