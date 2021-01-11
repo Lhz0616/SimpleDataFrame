@@ -3,7 +3,10 @@ import data.DataFrameWriter;
 import data.Sorting;
 import sql.DBReader;
 
+import java.util.Arrays;
+
 import static math.Scalers.*;
+import static math.Statistics.mode;
 
 // Object
 
@@ -37,14 +40,15 @@ public class Testing {
         //writer.writeDB("jdbc:mysql://localhost/groupmemberdb", "newTable", "root", "");
 
 
-        /*String filepath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
+        /*String filepath = "C:\\Users\\User\\Desktop\\WIX1002 FOP\\Project\\GitHub\\DataFrame.csv";
         DataFrameReader rd =new DataFrameReader();
         rd.readCSV(filepath);
         System.out.println(rd);*/
 
 
         /*Sorting st = new Sorting();
-        st.sort("Name", "descending");*/
+        st.sort("Name", "descending");
+        System.out.println(Arrays.toString(mode()));*/
 
     }
 }

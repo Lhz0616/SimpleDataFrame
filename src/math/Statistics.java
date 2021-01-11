@@ -168,7 +168,7 @@ public class Statistics {
                     }
                 }
                 if (highestCount > 1) {     //check whether the mode is true mode
-                    Mode[i] = String.format("%.0f", tempModeFloat);
+                    Mode[i] = String.valueOf(tempModeFloat);
                 } else {
                     Mode[i] = "No Mode";
                 }
