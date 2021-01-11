@@ -42,7 +42,7 @@ public class DataFrameWriter {
 
             // put the header into the file
             for(int z = 0; z<header.size(); z++){
-                writer.write(String.valueOf(header));
+                writer.write(String.valueOf(header.get(z)));
                 if(z<header.size()-1) writer.write(",");
                 else writer.write("\n");
             }

@@ -15,7 +15,7 @@ public class DBWriter {
     /**
      * {@code write} is a DataFrameWriter which is used to access the writeCSV method
      */
-    DataFrameWriter write = new DataFrameWriter();
+    private static DataFrameWriter write = new DataFrameWriter();
 
     /**
      * {@code Statement} is used to execute the SQL commands
@@ -72,12 +72,9 @@ public class DBWriter {
      * This is the {@code writeDB} where it will export a CSV file and then it will add
      * all the data into a sentence
      * It will then execute the SQL statement and update the table with the row of data
-     * @param s
-     * @param newTable
-     * @param root
-     * @param s1
+     *
      */
-    public void writeDB(String s, String newTable, String root, String s1) {
+    public void writeDB() {
 
         String state = "CREATE TABLE " + tableName + "(";
 

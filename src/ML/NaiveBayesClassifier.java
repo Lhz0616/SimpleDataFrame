@@ -1,4 +1,4 @@
-package com.ML;
+package ML;
 
 import java.lang.Math;
 import java.util.ArrayList;

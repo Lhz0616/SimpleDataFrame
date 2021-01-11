@@ -10,7 +10,7 @@ import java.util.List;
  * This will only connect to the localhost database
  * The driver version for the mySQL is {@code mysql-connector-java-8.0.22}
  */
-public class DBReader extends DataFrameReader {
+public class DBReader extends DataFrameReader{
 
     /**
      * {@code con} is a variable where it will save the connection status to the database

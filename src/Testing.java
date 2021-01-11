@@ -1,18 +1,20 @@
 import data.DataFrameReader;
+import data.DataFrameWriter;
 import data.Sorting;
+import sql.DBReader;
 
 // Object
 
 public class Testing {
     public static void main(String[] args){
-//        String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
-//
-//
-//        //DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
-//        DataFrameReader r = new DataFrameReader();
-//        r.readCSV(filePath);
-//        //read.readDB();
-//        System.out.println(r);
+        String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
+
+
+        DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
+        DataFrameReader r = new DataFrameReader();
+        //r.readCSV(filePath);
+        read.readDB();
+        System.out.println(read);
         /*Statistics s = new Statistics();
 
 
@@ -34,12 +36,14 @@ public class Testing {
         //writer.writeDB("jdbc:mysql://localhost/groupmemberdb", "newTable", "root", "");
 
 
-        String filepath = "C:\\Users\\User\\Documents\\NetBeansProjects\\DonaldProjectUpdated\\src\\Book1.csv";
+        /*String filepath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
         DataFrameReader rd =new DataFrameReader();
         rd.readCSV(filepath);
+        System.out.println(rd);*/
 
-        Sorting st = new Sorting();
-        st.sort("Name", "descending");
+
+        /*Sorting st = new Sorting();
+        st.sort("Name", "descending");*/
 
     }
 }

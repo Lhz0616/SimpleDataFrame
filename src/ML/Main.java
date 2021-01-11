@@ -1,10 +1,10 @@
-package com.ML;
+package ML;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.ML.K_NearestNeighbours.*;
-import static com.ML.NaiveBayesClassifier.*;
+import static ML.K_NearestNeighbours.*;
+import static ML.NaiveBayesClassifier.*;
 
 public class Main {
     public static void main(String[] args) {
