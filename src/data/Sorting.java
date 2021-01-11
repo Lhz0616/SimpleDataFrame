@@ -78,7 +78,7 @@ public class Sorting {
     }
 
     /**
-     * {@code sortNumberAsc} is a method to sort the column that is numbers
+     * {@code sortNumber} is a method to sort the column that is numbers
      *
      * @param SortedData data to be sorted
      */
@@ -101,7 +101,7 @@ public class Sorting {
     }
 
     /**
-     * {@code sortStringr} is a method to sort the column that is letters
+     * {@code sortString} is a method to sort the column that is letters
      *
      * @param SortedData data to be sorted
      */
@@ -130,7 +130,7 @@ public class Sorting {
      * @param value that is being parsed
      */
     //parse 0 if empty String is found
-    public float parseStringToFloat(String value) {
+    private float parseStringToFloat(String value) {
         return value.isEmpty() || value.equals("") ? 0.0f : Float.parseFloat(value);
     }
 }

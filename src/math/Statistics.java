@@ -22,7 +22,7 @@ public class Statistics {
     /**
      * {@code rc} is used to access the {@code getCOLUMNDATA} method to get COLUMNDATA
      */
-    static rowCol rc = new rowCol();
+    private static rowCol rc = new rowCol();
 
     /**
      * {@code calculate} is the variable to store the float number that is available in the
