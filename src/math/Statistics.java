@@ -130,7 +130,7 @@ public class Statistics {
      * {@code mode} is a method where it will find the data that occurs the most time in the column
      * take note that it will only return the first mode
      *
-     * @return  an Array of {@code String} that will show the mode
+     * @return an Array of {@code String} that will show the mode
      */
     public static String[] mode() {
         int numCol = COLUMNDATA.size();
@@ -157,7 +157,7 @@ public class Statistics {
 
                     for (int k = 0; k < temp.length; k++) {
                         Float temp2 = temp[k];
-                        if (Float.compare(temp1,temp2) == 0) {
+                        if (Float.compare(temp1, temp2) == 0) {
                             tempCount++;
 
                         }
@@ -168,10 +168,7 @@ public class Statistics {
                     }
                 }
                 if (highestCount > 1) {     //check whether the mode is true mode
-                    if (tempModeFloat % 1.0 != 0)
-                        Mode[i] = String.format("%s", tempModeFloat);
-                    else
-                        Mode[i] = String.format("%.0f", tempModeFloat);
+                    Mode[i] = String.format("%.0f", tempModeFloat);
                 } else {
                     Mode[i] = "No Mode";
                 }
