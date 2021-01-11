@@ -7,9 +7,18 @@ import java.util.stream.Collectors;
 
 
 public class Drop {
-    DataFrameReader dfr = new DataFrameReader();
+    private static DataFrameReader dfr = new DataFrameReader();
     private int i;
 
+    /**
+     * {@code dropDuplicate} is a method where it will drop the selected column with duplicates
+     * according to the occurence given
+     *
+     * Example: If the given number is 2, this method will remove the 2nd duplicate data
+     *
+     * @param category  an array of {@code String} to select to column
+     * @param num       choose the number of occurence
+     */
     public void dropDuplicate(String[] category, int num) {
         List<String> header = dfr.header;
         int[] a = new int[category.length];
@@ -57,6 +66,12 @@ public class Drop {
         System.out.println(dfr.DATA.toString());
     }
 
+    /**
+     * {@code dropNull} is a method where it will drop the row of data that has
+     * null value at the given column
+     *
+     * @param category  An array of {@code String} to select the column
+     */
     public void dropNull(String[] category) {
         List<String> header = dfr.header;
         int counter = 0;
@@ -98,6 +113,15 @@ public class Drop {
         System.out.println(dfr.DATA.toString());
     }
 
+    /**
+     * {@code getFrequentNumber} is a method where it will remove duplicate number and also
+     * remove the index that happens once only
+     *
+     * @param arr   an ArrayList of the index
+     * @param y     the length of the column the user given
+     *
+     * @return      an ArrayList of the index without duplicates
+     */
     private ArrayList<Integer> getFrequentNumber(ArrayList<Integer> arr, int y) {
         ArrayList<Integer> Nothing = new ArrayList<>();
         int occurrences = 0;

@@ -3,18 +3,19 @@ import data.DataFrameWriter;
 import data.Sorting;
 import sql.DBReader;
 
+import static math.Scalers.*;
+
 // Object
 
 public class Testing {
     public static void main(String[] args){
-        String filePath = "C:\\Users\\user\\Desktop\\SimpleDataFrame\\src\\Book1.csv";
-
-
-        DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
+        String filePath = "C:\\Users\\user\\IdeaProjects\\SimpleDataFrame\\src\\Book1.csv";
+        //DBReader read = new DBReader("groupmemberdb", "generalinfo", "root", "");
         DataFrameReader r = new DataFrameReader();
-        //r.readCSV(filePath);
-        read.readDB();
-        System.out.println(read);
+        r.readCSV(filePath);
+        //read.readDB();
+        System.out.println(r);
+
         /*Statistics s = new Statistics();
 
 
